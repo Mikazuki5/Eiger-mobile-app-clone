@@ -14,9 +14,10 @@ const SliderHorizontal:FC<Props> = (props) => {
     switch (props.type) {
       case 'menu':
         return _renderMenu(item, index);
-
       case 'banner-category':
         return _renderBannerCategory(item, index);
+      case 'prod-popularity':
+        return _renderProductPopularity(item, index);
     
       default:
         return null;
@@ -54,6 +55,64 @@ const SliderHorizontal:FC<Props> = (props) => {
     )
   }
 
+  const _renderProductPopularity = (item: any, index:any) => {
+    return(
+      <View style={styles.cardProduct}>
+        <View style={styles.cardImgProduct}>
+          <ImageBackground
+            source={_.get(item, 'imgProduct')}
+            style={{
+              width: 180,
+              height: 200,
+              marginBottom: 5
+            }}
+            imageStyle={{
+              borderRadius:10,
+            }}
+            resizeMode='contain'
+          >
+            {item?.isDiscount && (
+              <View style={{
+                backgroundColor: '#FD3C20',
+                width: '50%',
+                justifyContent:'center',
+                height: 25,
+                paddingHorizontal:10,
+                margin: 5,
+                borderRadius: 5
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 11,
+                  fontWeight: '800'
+                }}>DISKON {_.get(item, 'discountPercent')}%</Text>
+              </View>
+            )}
+          </ImageBackground>
+        </View>
+        <View style={{width: 179}}>
+          <Text style={styles.textProductCategory}>{_.get(item, 'typeProduct') + ' • ' +_.get(item, 'category')}</Text>
+          <Text style={styles.textProductTitle}>{_.get(item, 'title')}</Text>
+          <Text style={styles.textProductPrice}>{_.get(item, 'price')}</Text>
+          {item?.isDiscount && (
+            <View style={[{ zIndex: 10,}]}>
+              <Text style={styles.textProductPrice}>{_.get(item, 'priceAfterDiscount')}</Text>
+              <View
+                style={{
+                  width: 100,
+                  height: 1.5,
+                  backgroundColor: 'grey',
+                  position:'relative',
+                  bottom: 9.5
+                }}
+              />
+            </View>
+          )}
+        </View>
+      </View>
+    )
+  }
+
   return (
     <FlatList
       data={props.data}
@@ -84,5 +143,28 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
     fontWeight: '900'
+  },
+  cardProduct: {
+    marginTop: 10,
+    marginRight: 15
+  },
+  cardImgProduct: {
+    borderRadius: 10,
+  },
+  textProductCategory: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontSize: 12,
+  },
+  textProductTitle: {
+    fontSize: 17,
+    color: 'black',
+    fontWeight: '900',
+    lineHeight: 25
+  },
+  textProductPrice: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: '500',
+    lineHeight: 20
   }
 })
