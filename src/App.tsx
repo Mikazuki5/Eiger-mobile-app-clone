@@ -1,21 +1,15 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native"
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeContainer from "../src/Main/Home/HomeContainer";
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { persistor, store } from "@/Store";
+import ApplicationNavigation from "./Navigator/Application";
 
-const Stack = createNativeStackNavigator();
-
-const app = () => {
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeContainer} options={{headerShown: false}} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
-  )
-}
+const app = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <ApplicationNavigation />
+    </PersistGate>
+  </Provider>
+)
 
 export default app;

@@ -1,7 +1,17 @@
-import { Alert, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { FC } from 'react'
+import { 
+  Alert, 
+  FlatList, 
+  ImageBackground, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View 
+} from 'react-native'
+import * as _ from 'lodash';
+
 import Icon from '../../../Shared/Assets/Icon';
-import _ from 'lodash';
+import useTheme from '@/Hooks/useTheme';
 
 interface Props {
   data?: any,
@@ -9,6 +19,8 @@ interface Props {
 }
 
 const SliderHorizontal:FC<Props> = (props) => {
+
+  const {Gutters} = useTheme();
 
   const _renderContent = ({item, index}: any) => {
     switch (props.type) {
@@ -27,7 +39,7 @@ const SliderHorizontal:FC<Props> = (props) => {
 
   const _renderMenu = (item: any, index:any) => {
     return (
-      <View style={{marginRight: 10, marginBottom: 20}}>
+      <View style={[Gutters.regularRMargin,{ marginBottom: 20}]} key={index}>
         <TouchableOpacity 
           style={styles.cardWrapper}
           onPress={() => Alert.alert(`${item.name}`)}
@@ -40,7 +52,7 @@ const SliderHorizontal:FC<Props> = (props) => {
 
   const _renderBannerCategory = (item:any, index:any) => {
     return (
-      <View>
+      <View key={index}>
         <TouchableOpacity style={{borderRadius: 15, marginRight: 10}}>
           <ImageBackground
             source={_.get(item, 'url')}
@@ -57,7 +69,7 @@ const SliderHorizontal:FC<Props> = (props) => {
 
   const _renderProductPopularity = (item: any, index:any) => {
     return(
-      <View style={styles.cardProduct}>
+      <View style={styles.cardProduct} key={index}>
         <View style={styles.cardImgProduct}>
           <ImageBackground
             source={_.get(item, 'imgProduct')}
@@ -115,6 +127,7 @@ const SliderHorizontal:FC<Props> = (props) => {
 
   return (
     <FlatList
+      key={props.type}
       data={props.data}
       keyExtractor={(index) => index.toString()}
       horizontal
