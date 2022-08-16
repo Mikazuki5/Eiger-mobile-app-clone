@@ -20,7 +20,7 @@ interface Props {
 
 const SliderHorizontal:FC<Props> = (props) => {
 
-  const {Gutters} = useTheme();
+  const {Gutters, Fonts} = useTheme();
 
   const _renderContent = ({item, index}: any) => {
     switch (props.type) {
@@ -39,12 +39,13 @@ const SliderHorizontal:FC<Props> = (props) => {
 
   const _renderMenu = (item: any, index:any) => {
     return (
-      <View style={[Gutters.regularRMargin,{ marginBottom: 20}]} key={index}>
+      <View style={[Gutters.regularRMargin, { marginBottom: 20}]} key={index}>
         <TouchableOpacity 
-          style={styles.cardWrapper}
+          style={[Gutters.regularHPadding, styles.cardWrapper]}
           onPress={() => Alert.alert(`${item.name}`)}
         >
           <Icon type={_.get(item, 'icon')} size={30} tintColor={'#D73350'} />
+          <Text style={[Fonts.textExtraSmall, Fonts.textCenter]}>{_.get(item, 'name')}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -141,7 +142,6 @@ export default SliderHorizontal
 const styles = StyleSheet.create({
   cardWrapper: {
     backgroundColor: '#FFFFFF',
-    width: 55,
     height: 60,
     borderRadius: 10,
     justifyContent:'center'

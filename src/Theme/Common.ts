@@ -5,11 +5,13 @@
  */
 import { StyleSheet } from 'react-native'
 import buttonStyles from './components/Buttons'
+import cardStyles from './components/Card'
 import { CommonParams } from './theme'
 
 export default function <C>({ Colors, ...args }: CommonParams<C>) {
   return {
     button: buttonStyles({ Colors, ...args }),
+    card: cardStyles({Colors, ...args}),
     ...StyleSheet.create({
       backgroundPrimary: {
         backgroundColor: Colors.primary,

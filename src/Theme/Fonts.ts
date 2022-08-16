@@ -6,6 +6,10 @@ import { ThemeVariables } from './theme'
 
 export default function ({ FontSize, Colors }: ThemeVariables) {
   return StyleSheet.create({
+    textExtraSmall: {
+      fontSize: FontSize.extraSmall,
+      color: Colors.text
+    },
     textSmall: {
       fontSize: FontSize.small,
       color: Colors.text,
@@ -45,5 +49,8 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
     textRight: {
       textAlign: 'right',
     },
+    textBold: {
+      fontWeight: 'bold'
+    }
   })
 }

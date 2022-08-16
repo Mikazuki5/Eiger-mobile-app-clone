@@ -23,6 +23,7 @@ export default function ({}: ThemeVariables) {
       flexDirection: 'column',
       justifyContent: 'center',
     },
+
     /* Row Layouts */
     row: {
       flexDirection: 'row',
@@ -77,6 +78,7 @@ export default function ({}: ThemeVariables) {
     selfStretch: {
       alignSelf: 'stretch',
     },
+    
     /* Sizes Layouts */
     fill: {
       flex: 1,
